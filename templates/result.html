@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Gas Lift Valve Design</title>
+
+    <!-- Bootstrap -->
+    <link href="\static\css\bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+
+    <header class="container-fluid" style="background:#300672; color:white">
+      <h1 style="margin:20px; text-align:center">Gas Lift Valve Analytical Design</h1></header>
+    <header>
+    <br>
+
+
+    <form action="/result" method="POST" class="container-fluid">
+      <div class="row">
+        <div class="form-group col-lg-3">
+          <label for="">Pay Zone Depth (ft):</label>
+          <input value="{{Dp}}" type="text" class="form-control" name="Dp" id="pwd">
+        </div>
+        <div class="form-group col-lg-3">
+          <label for="pwd">Kill fluid gradient (psia/ft):</label>
+          <input value="{{gs}}" type="text" class="form-control" name="gs" id="pwd">
+        </div>
+        <div class="form-group col-lg-3">
+          <label for="pwd">Gas gravity:</label>
+          <input value="{{y}}" type="text" class="form-control" name="y" id="pwd">
+        </div>
+        <div class="form-group col-lg-3">
+          <label for="pwd">Bottom-hole temperature (F):</label>
+          <input value="{{Tb}}" type="text" class="form-control" name="Tb" id="pwd">
+        </div>
+        <div class="form-group col-lg-3">
+          <label for="">Surface temperature (F):</label>
+          <input value="{{Ts}}" type="text" class="form-control" name="Ts" id="pwd">
+        </div>
+        <div class="form-group col-lg-3">
+          <label for="pwd">Injection depth (ft):</label>
+          <input value="{{Di}}" type="text" class="form-control" name="Di" id="pwd">
+        </div>
+        <div class="form-group col-lg-3">
+          <label for="pwd">Tubing pressure at Injection point (psia):</label>
+          <input value="{{pti}}" type="text" class="form-control" name="pti" id="pwd">
+        </div>
+        <div class="form-group col-lg-3">
+          <label for="pwd">Pressure Kickoff (psia):</label>
+          <input value="{{pk}}" type="text" class="form-control" name="pk" id="pwd">
+        </div>
+        <div class="form-group col-lg-3">
+          <label for="">Pressure surface operating (psia):</label>
+          <input value="{{ps}}" type="text" class="form-control" name="ps" id="pwd">
+        </div>
+        <div class="form-group col-lg-3">
+          <label for="pwd">Pressure of wellhead (psia):</label>
+          <input value="{{pwh}}" type="text" class="form-control" name="pwh" id="pwd">
+        </div>
+        <div class="form-group col-lg-3">
+          <label for="pwd">Tubing Pressure margin at surface (psia):</label>
+          <input value="{{ptm}}" type="text" class="form-control" name="ptm" id="pwd">
+        </div>
+        <div class="form-group col-lg-3">
+          <label for="pwd">Casing Pressure Margin (psia):</label>
+          <input value="{{pcm}}" type="text" class="form-control" name="pcm" id="pwd">
+        </div>
+        <div class="form-group col-lg-3">
+          <label for="pwd">Upstream pressure (psia):</label>
+          <input value="{{Pup}}" type="text" class="form-control" name="Pup" id="pwd">
+        </div>
+        <div class="form-group col-lg-3">
+          <label for="pwd">Downstream pressure (psia):</label>
+          <input value="{{Pdn}}" type="text" class="form-control" name="Pdn" id="pwd">
+        </div>
+        <div class="form-group col-lg-3">
+          <label for="pwd">Gas rate (MSCF):</label>
+          <input value="{{qg}}" type="text" class="form-control" name="qg" id="pwd">
+        </div>
+        <div class="form-group col-lg-3">
+          <label for="pwd">Gas specific heat ratio:</label>
+          <input value="{{k}}" type="text" class="form-control" name="k" id="pwd">
+        </div>
+        <div class="form-group col-lg-3">
+          <label for="pwd">Upstream temperature:</label>
+          <input value="{{Tup}}" type="text" class="form-control" name="Tup" id="pwd">
+        </div>
+        <div class="form-group col-lg-3">
+          <label for="pwd">Choke discharge coefficient:</label>
+          <input value="{{C}}" type="text" class="form-control" name="C" id="pwd">
+        </div>
+        <div class="form-group col-lg-3">
+          <label for="pwd">Pressure of spring Tension (psia):</label>
+          <input value="{{S}}" type="text" class="form-control" name="S" id="pwd">
+        </div>
+      </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <button type="submit" class="btn btn-default" style="background:#300672; color:white">Submit</button>
+      </div>
+    </div>
+
+      </div>
+   </form>
+<br><br>
+{%if result == True %}
+   <div class="container-fluid">
+    <table class="table table-striped" style="text-align: center">
+      <thead class="thead-dark" style="background:#300672; color:white">
+        <tr>
+          <th class="col-lg-1" style="margin-left: 20px">Valve No</th>
+          <th class="col-lg-1">Valve Depth, ft</th>
+          <th>Temperature, F</th>
+          <th>Design tubing pressure, psia</th>
+          <th>Surface opening pressure, psia</th>
+          <th>Valve opening pressure, psia</th>
+          <th>Dome pressure at depth, psia</th>
+          <th>Valve closing pressure, psia</th>
+          <th>Dome pressure at 60 F, psia</th>
+          <th>Test Rack opening, psia</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for valve,temp,dtp,vop,dpd,vcp,dp60,tro in Valves|zip(T, DTP, VOP, DPD, VCP, DP60, TRO) %}
+          <tr>
+            <th class="col-lg-1" style="margin-left: 20px">{{ Valves.index(valve)+1 }}</th>
+            <th class="col-lg-1">{{valve}}</th>
+            <th>{{temp}}</th>
+            <th>{{dtp}}</th>
+            <th>{{Pcs}}</th>
+            <th>{{vop}}</th>
+            <th>{{dpd}}</th>
+            <th>{{vcp}}</th>
+            <th>{{dp60}}</th>
+            <th>{{tro}}</th>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+   </div>
+{%endif%}
+
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
